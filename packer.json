@@ -5,7 +5,7 @@
     "type": "virtualbox-iso",
     "guest_os_type": "RedHat_64",
     "hard_drive_interface": "ide",
-    "headless": "true",
+    "headless": "false",
     "iso_interface": "ide",
     "vboxmanage": [
       ["modifyvm", "{{.Name}}", "--memory", "1024"],
