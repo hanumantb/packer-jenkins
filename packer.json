@@ -1,0 +1,40 @@
+{
+  "builders" : [
+  {
+    "name": "centos-7",
+    "type": "virtualbox-iso",
+    "guest_os_type": "RedHat_64",
+    "hard_drive_interface": "ide",
+    "headless": "true",
+    "iso_interface": "ide",
+    "vboxmanage": [
+      ["modifyvm", "{{.Name}}", "--memory", "1024"],
+      ["modifyvm", "{{.Name}}", "--cpus", "1"],
+      ["modifyvm", "{{.Name}}", "--nictype1", "virtio"]
+    ],
+    "iso_url": "CentOS-7-x86_64-Minimal-1511.iso",
+    "iso_checksum": "88c0437f0a14c6e2c94426df9d43cd67",
+    "iso_checksum_type": "md5",
+    "boot_command": [
+      "<up><tab><spacebar>",
+      "inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos7.ks<return>"
+    ],
+    "http_directory": ".",
+    "ssh_username": "vagrant",
+    "ssh_private_key_file": "insecure_private_key",
+    "ssh_timeout": "60m",
+    "shutdown_command": "sudo poweroff"
+  }],
+  "provisioners": [{
+    "type": "shell",
+    "inline": [
+      "set -e -x",
+      "sudo mount -o loop -t iso9660 VBoxGuestAdditions.iso /mnt",
+      "(cd /mnt && sudo sh ./VBoxLinuxAdditions.run)"
+    ]
+  }],
+  "post-processors": [{
+    "type": "vagrant",
+    "output": "{{.BuildName}}_{{.Provider}}.box"
+  }]
+}
