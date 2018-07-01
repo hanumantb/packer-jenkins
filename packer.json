@@ -12,7 +12,7 @@
       ["modifyvm", "{{.Name}}", "--cpus", "1"],
       ["modifyvm", "{{.Name}}", "--nictype1", "virtio"]
     ],
-    "iso_url": "C:/Users/linux/Documents/packer/CentOS-7-x86_64-Minimal-1511.iso",
+    "iso_url": "CentOS-7-x86_64-Minimal-1804.iso",
     "iso_checksum": "88c0437f0a14c6e2c94426df9d43cd67",
     "iso_checksum_type": "md5",
     "boot_command": [
